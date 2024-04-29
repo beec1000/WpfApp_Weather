@@ -12,5 +12,11 @@ namespace WpfApp_Weather
         public float Temperature { get; set; }
         public float Humidity { get; set; }
         public float WindStrength { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} | {Temperature}°C | {Humidity}% | {WindStrength}km/h";
+        }
     }
+    
 }

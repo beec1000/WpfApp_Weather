@@ -16,26 +16,62 @@ namespace WpfApp_Weather
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<City> cities = new List<City>();
+        private List<City> cities;
 
         public MainWindow()
         {
             InitializeComponent();
+            cities = [new City() { Name = "TesztVaros", Temperature = 69f, Humidity = 420f, WindStrength = 42.069f }];
+
+            List.ItemsSource = cities;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            List.Items.Add(Name.Text + "|" + Temperature.Text + "°C" + "|" + Humidity.Text + "%" + "|" + Wind.Text + "km/h");
-            Name.Text = string.Empty;
-            Temperature.Text = string.Empty;
-            Humidity.Text = string.Empty;
-            Wind.Text = string.Empty;
+            if (float.TryParse(Temperature.Text, out float temperature) &&
+                float.TryParse(Humidity.Text, out float humidity) &&
+                float.TryParse(Wind.Text, out float wind))
+            {
+                cities.Add(new City()
+                {
+                    Name = Name.Text,
+                    Temperature = temperature,
+                    Humidity = humidity,
+                    WindStrength = wind
+                });
+
+                List.ItemsSource = null;
+                List.ItemsSource = cities;
+
+                Name.Text = string.Empty;
+                Temperature.Text = string.Empty;
+                Humidity.Text = string.Empty;
+                Wind.Text = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid numeric values for temperature, humidity, and wind.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var selected = List.SelectedItems;
+            List<City> selectedC = new List<City>();
+            foreach (var i in List.SelectedItems)
+            {
+                if (i is City city)
+                {
+                    selectedC.Add(city);
+                }
+            }
 
+            foreach (var c in selectedC)
+            {
+                cities.Remove(c);
+            }
+
+            List.ItemsSource = null;
+            List.ItemsSource = cities;
         }
     }
 }
