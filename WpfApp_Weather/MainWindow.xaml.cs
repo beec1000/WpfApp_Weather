@@ -1,19 +1,9 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp_Weather
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private List<City> cities;
@@ -21,9 +11,26 @@ namespace WpfApp_Weather
         public MainWindow()
         {
             InitializeComponent();
-            cities = [new City() { Name = "TesztVaros", Temperature = 69f, Humidity = 420f, WindStrength = 42.069f }];
+            cities = new List<City>
+            {
+                new City() { Name = "TesztVaros", Temperature = 69f, Humidity = 420f, WindStrength = 42.069f }
+            };
 
             List.ItemsSource = cities;
+            List.SelectionChanged += List_SelectionChanged;
+        }
+
+        private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = List.SelectedItem as City;
+            if (selected != null)
+            {
+                DataList.ItemsSource = new List<City> { selected };
+            }
+            else
+            {
+                DataList.ItemsSource = null;
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -50,24 +57,24 @@ namespace WpfApp_Weather
             }
             else
             {
-                MessageBox.Show("Please enter valid numeric values for temperature, humidity, and wind.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter valid values for temperature, humidity, and wind.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            List<City> selectedC = new List<City>();
-            foreach (var i in List.SelectedItems)
+            List<City> selectedCities = new List<City>();
+            foreach (var item in List.SelectedItems)
             {
-                if (i is City city)
+                if (item is City city)
                 {
-                    selectedC.Add(city);
+                    selectedCities.Add(city);
                 }
             }
 
-            foreach (var c in selectedC)
+            foreach (var city in selectedCities)
             {
-                cities.Remove(c);
+                cities.Remove(city);
             }
 
             List.ItemsSource = null;

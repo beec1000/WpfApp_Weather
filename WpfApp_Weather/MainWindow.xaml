@@ -7,22 +7,45 @@
         mc:Ignorable="d"
         Title="Weather App" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="List" Margin="20,25,430,220">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="126"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Cities" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Information" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <ListBox x:Name="List" Grid.Row="1" Grid.Column="0"/>
+        <ListBox x:Name="DataList" Grid.Row="1" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Temperature, StringFormat={}{0}°C}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding Humidity, StringFormat={}{0}%}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding WindStrength, StringFormat={}{0} km/h}" Margin="0,0,0,5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-        
-        <Label Content="City:" HorizontalAlignment="Left" Margin="105,270,0,0" VerticalAlignment="Top"/>
-        <Label Content="Temperature:" HorizontalAlignment="Left" Margin="59,293,0,0" VerticalAlignment="Top"/>
-        <Label Content="Humidity:" HorizontalAlignment="Left" Margin="77,315,0,0" VerticalAlignment="Top"/>
-        <Label Content="Wind Strength:" HorizontalAlignment="Left" Margin="49,338,0,0" VerticalAlignment="Top"/>
-        
-        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="135,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Temperature" HorizontalAlignment="Left" Margin="135,296,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Humidity" HorizontalAlignment="Left" Margin="135,319,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Wind" HorizontalAlignment="Left" Margin="135,342,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        
-        <Button Content="Add" HorizontalAlignment="Left" Margin="330,273,0,0" VerticalAlignment="Top" Click="AddButton_Click"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="330,299,0,0" VerticalAlignment="Top" Click="DeleteButton_Click"/>
-        
+
+        <Label Content="City:" Grid.Row="2" Grid.Column="0" Margin="20,5,0,0" HorizontalAlignment="Right"/>
+        <Label Content="Temperature:" Grid.Row="2" Grid.Column="0" Margin="20,35,0,0" HorizontalAlignment="Right"/>
+        <Label Content="Humidity:" Grid.Row="2" Grid.Column="0" Margin="20,65,0,0" HorizontalAlignment="Right"/>
+        <Label Content="Wind Strength:" Grid.Row="2" Grid.Column="0" Margin="20,95,0,0" HorizontalAlignment="Right"/>
+
+        <TextBox x:Name="Name" Grid.Row="2" Grid.Column="1" Margin="10,5,10,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Temperature" Grid.Row="2" Grid.Column="1" Margin="10,35,10,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Humidity" Grid.Row="2" Grid.Column="1" Margin="10,65,10,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Wind" Grid.Row="2" Grid.Column="1" Margin="10,95,10,0" VerticalAlignment="Top"/>
+
+        <Button Content="Add" Grid.Row="3" Grid.Column="1" Margin="100,5,0,25" HorizontalAlignment="Left" Click="AddButton_Click" Background="Green" Foreground="White" BorderBrush="Snow"/>
+        <Button Content="Delete" Grid.Row="3" Grid.Column="1" Margin="0,5,90,25" HorizontalAlignment="Right" Click="DeleteButton_Click"  Background="Red" Foreground="White" BorderBrush="Snow"/>
     </Grid>
 </Window>
