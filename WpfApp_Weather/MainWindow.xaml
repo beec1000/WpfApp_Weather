@@ -27,9 +27,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Temperature, StringFormat={}{0}°C}" Margin="0,0,0,5"/>
-                        <TextBlock Text="{Binding Humidity, StringFormat={}{0}%}" Margin="0,0,0,5"/>
-                        <TextBlock Text="{Binding WindStrength, StringFormat={}{0} km/h}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding Temperature, StringFormat={}{0}°C (Temperature)}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding Humidity, StringFormat={}{0}% (Humidity)}" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding WindStrength, StringFormat={}{0} km/h (WindStrength)}" Margin="0,0,0,5"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
