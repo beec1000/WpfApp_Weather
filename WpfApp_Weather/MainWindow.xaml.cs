@@ -17,6 +17,7 @@ namespace WpfApp_Weather
             List.SelectionChanged += List_SelectionChanged;
 
             List.SelectedItem = cities[0];
+
         }
 
         private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -49,7 +49,7 @@ namespace WpfApp_Weather
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name}"; //- {Temperature}°C {Humidity}% {WindStrength}km/h";
         }
     }
     
